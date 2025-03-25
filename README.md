@@ -1,5 +1,5 @@
 # AP-zabbix
-Une fois le git clone effectuer nous allons effetuer la commande afin de lancer l'installation de notre zabbix:
+Une fois le git clone effectuer nous allons effetuer la commande afin de lancer l'installation de notre zabbixc:
 
 ``` docker compose up -d ```
 
