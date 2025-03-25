@@ -11,8 +11,7 @@ services:
       MYSQL_USER: zabbix
       MYSQL_PASSWORD: zabbix_password
     volumes:
-      
-zabbix-db-data:/var/lib/mysql
+      - zabbix-db-data:/var/lib/mysql
 
   zabbix-server:
     image: zabbix/zabbix-server-mysql:alpine-6.0-latest
@@ -24,10 +23,9 @@ zabbix-db-data:/var/lib/mysql
       MYSQL_USER: zabbix
       MYSQL_PASSWORD: zabbix_password
     depends_on:
-      
-db
-  ports:
-"10051:10051"
+      - db
+    ports:
+      - "10051:10051"
 
   zabbix-web:
     image: zabbix/zabbix-web-nginx-mysql:alpine-6.0-latest
@@ -41,11 +39,10 @@ db
       ZBX_SERVER_HOST: zabbix-server
       PHP_TZ: "Europe/Paris"
     depends_on:
-      
-db
-zabbix-server
-ports:
-"8080:8080"
+      - db
+      - zabbix-server
+    ports:
+      - "8080:8080"
 
   zabbix-agent2:
     image: zabbix/zabbix-agent2:alpine-6.0-latest
@@ -55,8 +52,7 @@ ports:
       ZBX_SERVER_HOST: zabbix-server
       ZBX_ACTIVE_ALLOW: "true"
     depends_on:
-      
-zabbix-server
+      - zabbix-server
 
 volumes:
   zabbix-db-data:
